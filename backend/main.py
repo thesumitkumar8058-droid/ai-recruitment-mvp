@@ -76,7 +76,17 @@ class Application(Base):
 
 Base.metadata.create_all(engine)
 app = FastAPI(title="AI Recruitment MVP", version="1.1.0")
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "https://ai-recruitment-mvp-psi.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 security = HTTPBearer()
 
 class LoginIn(BaseModel):
