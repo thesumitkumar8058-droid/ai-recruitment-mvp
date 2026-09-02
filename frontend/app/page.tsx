@@ -1104,7 +1104,7 @@ if (
 if (!token) {
     return (
       <div className="login">
-        <h1>AI Recruitment MVP</h1>
+        <h1>Sunrise AI Recruitment</h1>
 
 <p className="muted">
           Demo recruiter login
