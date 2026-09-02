@@ -126,6 +126,8 @@ const [email, setEmail] = useState(
 const [password, setPassword] = useState(
     'admin123'
   )
+  const [showPassword, setShowPassword] = useState(false)
+
 
 const [activeSection, setActiveSection] =
     useState<Section>('dashboard')
@@ -1140,20 +1142,86 @@ if (!token) {
           Password
         </label>
 
-<input
-          id="login-password"
-          type="password"
-          value={password}
-          disabled={busy === 'login'}
-          onChange={event =>
-            setPassword(event.target.value)
-          }
-          onKeyDown={event => {
-            if (event.key === 'Enter') {
-              void login()
-            }
-          }}
-        />
+<div style={{ position: "relative", width: "100%" }}>
+  <input
+    id="login-password"
+    type={showPassword ? "text" : "password"}
+    value={password}
+    disabled={busy === "login"}
+    onChange={event =>
+      setPassword(event.target.value)
+    }
+    onKeyDown={event => {
+      if (event.key === "Enter") {
+        void login()
+      }
+    }}
+    style={{ paddingRight: "44px" }}
+  />
+
+<button
+    type="button"
+    onClick={() =>
+      setShowPassword(current => !current)
+    }
+    disabled={busy === "login"}
+    aria-label={
+      showPassword ? "Hide password" : "Show password"
+    }
+    title={
+      showPassword ? "Hide password" : "Show password"
+    }
+    style={{
+      position: "absolute",
+      top: "50%",
+      right: "12px",
+      transform: "translateY(-50%)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 0,
+      border: "none",
+      background: "transparent",
+      color: "inherit",
+      cursor: "pointer"
+    }}
+  >
+    {showPassword ? (
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M3 3l18 18" />
+        <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+        <path d="M9.9 4.2A10.5 10.5 0 0 1 12 4c5.5 0 9.5 5.5 9.5 8a8.7 8.7 0 0 1-2.1 3.5" />
+        <path d="M6.6 6.6C4 8.2 2.5 10.7 2.5 12c0 2.5 4 8 9.5 8a10 10 0 0 0 4.1-.9" />
+      </svg>
+    ) : (
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    )}
+  </button>
+</div>
+
 
 <button
           className="btn"
